@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ustink.apps.UstinkConfig',
+    'frontend.apps.FrontendConfig',
     'crispy_forms',
 ]
 
