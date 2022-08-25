@@ -1,0 +1,84 @@
+{% extends 'main.html' %}
+{% block content %}
+
+    <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" style="font-family: 'B Nazanin'; font-size: 28px" href="#"> بوی سگ </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-item nav-link btn" style="font-size: 18px; font-family: 'B Nazanin'" href="#"><span class="glyphicon glyphicon-log-in"></span> ورود </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-item nav-link btn" style="font-size: 18px; font-family: 'B Nazanin'" href="#"><span class="glyphicon glyphicon-user"></span> ثبت نام </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-item nav-link btn" style="font-size: 18px; font-family: 'B Nazanin'" href="#"><span class="glyphicon glyphicon-phone"></span> ارتباط با ما </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    </nav>
+
+
+    <form action="{% url "home" %}" method="post">
+    {% csrf_token %}
+        <div class="form-group">
+            <label for="name">اسمش چیه؟</label>
+            <input class="form-control form-control-lg" id="name" type="text" name="name"
+            maxlength="100" style="float: right" size="30" placeholder="علی اکبر" required>
+        </div>
+        <br><br><br><br>
+        <div class="form-group">
+            <label for="email">ایمیلش چیه؟</label>
+            <input class="form-control form-control-lg" id="email" type="email" name="email"
+            placeholder="ustink@gmail.com" maxlength="256" required>
+        </div>
+        <br>
+        <input type="submit" value="ارسال" class="btn btn-primary bg-primary" style="float: right">
+        <br><br><br>
+        <button onclick="myFunction()" data-toggle="tooltip" title="ویرایش پیام ارسالی" class="bi bi-question-circle btn" id="question-mark"
+           style="float: right; font-size: 20px"></button>
+
+    </form>
+
+
+{#        <div class="alert alert-warning alert-dismissible fade show" role="alert">#}
+{#              <strong>Holy guacamole!</strong> You should check in on some of those fields below.#}
+{#              <button type="button" class="close" data-dismiss="alert" aria-label="Close">#}
+{#                  <span aria-hidden="true">&times;</span>#}
+{#              </button>#}
+{#        </div>#}
+
+
+    <script>
+
+        function myFunction()
+        {
+            if(!alertify.myAlert){
+              //define a new dialog
+              alertify.dialog('myAlert',function(){
+                return{
+                  main:function(message){
+                    this.message = message;
+                  },
+                  setup:function(){
+                      return {
+                        buttons:[{text: "اوکی", key:27/*Esc*/}],
+                        focus: { element:0 }
+                      };
+                  },
+                  prepare:function(){
+                    this.setContent(this.message);
+                  }
+              }});
+            }
+            //launch it.
+            alertify.myAlert("نگوز گوزو");
+        }
+
+    </script>
+{% endblock content %}
