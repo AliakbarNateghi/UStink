@@ -1,84 +1,112 @@
 {% extends 'main.html' %}
 {% block content %}
 
-    <nav class="navbar navbar-expand-lg navbar-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" style="font-family: 'B Nazanin'; font-size: 28px" href="#"> بوی سگ </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-item nav-link btn" style="font-size: 18px; font-family: 'B Nazanin'" href="#"><span class="glyphicon glyphicon-log-in"></span> ورود </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-item nav-link btn" style="font-size: 18px; font-family: 'B Nazanin'" href="#"><span class="glyphicon glyphicon-user"></span> ثبت نام </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-item nav-link btn" style="font-size: 18px; font-family: 'B Nazanin'" href="#"><span class="glyphicon glyphicon-phone"></span> ارتباط با ما </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    </nav>
-
-
-    <form action="{% url "home" %}" method="post">
-    {% csrf_token %}
-        <div class="form-group">
-            <label for="name">اسمش چیه؟</label>
-            <input class="form-control form-control-lg" id="name" type="text" name="name"
-            maxlength="100" style="float: right" size="30" placeholder="علی اکبر" required>
+        <div id="mySidenav" class="sidenav">
+          <a href="#" class="closebtn" onclick="shift()">&#9776;</a>
+          <a href="#"><span class="glyphicon glyphicon-log-in"></span> ورود </a>
+          <a href="#"><span class="glyphicon glyphicon-user"></span> ثبت نام </a>
+          <a href="#"><span class="glyphicon glyphicon-phone"></span> ارتباط با ما </a>
         </div>
-        <br><br><br><br>
-        <div class="form-group">
-            <label for="email">ایمیلش چیه؟</label>
-            <input class="form-control form-control-lg" id="email" type="email" name="email"
-            placeholder="ustink@gmail.com" maxlength="256" required>
+
+        <div id="main">
+          <span style="font-size:30px;cursor:pointer" onclick="shift()">&#9776;</span>
         </div>
-        <br>
-        <input type="submit" value="ارسال" class="btn btn-primary bg-primary" style="float: right">
-        <br><br><br>
-        <button onclick="myFunction()" data-toggle="tooltip" title="ویرایش پیام ارسالی" class="bi bi-question-circle btn" id="question-mark"
-           style="float: right; font-size: 20px"></button>
 
-    </form>
-
-
-{#        <div class="alert alert-warning alert-dismissible fade show" role="alert">#}
-{#              <strong>Holy guacamole!</strong> You should check in on some of those fields below.#}
-{#              <button type="button" class="close" data-dismiss="alert" aria-label="Close">#}
-{#                  <span aria-hidden="true">&times;</span>#}
-{#              </button>#}
-{#        </div>#}
-
-
-    <script>
-
-        function myFunction()
+        <script>
+        let x = 0
+        function shift()
         {
-            if(!alertify.myAlert){
-              //define a new dialog
-              alertify.dialog('myAlert',function(){
-                return{
-                  main:function(message){
-                    this.message = message;
-                  },
-                  setup:function(){
-                      return {
-                        buttons:[{text: "اوکی", key:27/*Esc*/}],
-                        focus: { element:0 }
-                      };
-                  },
-                  prepare:function(){
-                    this.setContent(this.message);
-                  }
-              }});
+            if (x === 0)
+            {
+                openNav()
+                x = 1
+            }else {
+                closeNav()
+                x = 0
             }
-            //launch it.
-            alertify.myAlert("نگوز گوزو");
         }
 
-    </script>
+        function openNav()
+        {
+          document.getElementById("mySidenav").style.width = "100%";
+          document.getElementById("main").style.marginLeft = "250px";
+        }
+
+        function closeNav()
+        {
+          document.getElementById("mySidenav").style.width = "0";
+          document.getElementById("main").style.marginLeft= "0";
+        }
+        </script>
+
+        <form action="{% url "home" %}" method="post">
+        {% csrf_token %}
+            <div class="form-group">
+                <label for="name">اسمش چیه؟</label>
+                <input class="form-control form-control-lg" id="name" type="text" name="name"
+                maxlength="100" style="float: right" size="30" placeholder="علی اکبر" required>
+            </div>
+            <br><br><br><br>
+            <div class="form-group">
+                <label for="email">ایمیلش چیه؟</label>
+                <input class="form-control form-control-lg" id="email" type="email" name="email"
+                placeholder="ustink@gmail.com" maxlength="256" required>
+            </div>
+            <br>
+            <input type="submit" value="ارسال" class="btn btn-primary bg-primary" style="float: right">
+            <br><br><br>
+            <button onclick="myAlertFunction()" data-toggle="tooltip" title="ویرایش پیام ارسالی" class="bi bi-question-circle btn" id="question-mark"
+               style="float: right; font-size: 20px"></button>
+        </form>
+
+
+        <script>
+
+            {#function myAlertFunction()#}
+            {#{#}
+            {#    if(!alertify.myAlert){#}
+            {#      //define a new dialog#}
+            {#      alertify.dialog('myAlert',function()#}
+            {#      {#}
+            {#        return{#}
+            {#          main:function(message)#}
+            {#          {#}
+            {#            this.message = message;#}
+            {#          },#}
+            {#          setup:function()#}
+            {#          {#}
+            {#              return {#}
+            {#                buttons:[{text: "ok", key:27/*Esc*/}, {text: "edit"}],#}
+            {#                focus: { element:0 }#}
+            {#              };#}
+            {#          },#}
+            {#          prepare:function(){#}
+            {#            this.setContent(this.message);#}
+            {#          }#}
+            {#      }});#}
+            {#    }#}
+            {##}
+            {#    let defaultText = "The MIT License (MIT) Copyright (c) 2014 Mohammad Younes Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal  in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software."#}
+            {#    alertify.myAlert(defaultText);#}
+
+
+
+                function myAlertFunction() {
+                    if (!alertify.errorAlert) {
+                        alertify.dialog('errorAlert', function factory() {
+                            return {
+                                build: function () {
+                                    let errorHeader = `<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default</span>`;
+                                    this.setHeader(errorHeader);
+                                }
+                            };
+                        }, true, 'alert');
+                    }
+
+                    alertify.errorAlert(`<p style="font-family: 'B Nazanin'; font-size: 20px">` + "متن پیشفرض" + "<br/>" +
+                            "<a href='javascript:alertify.errorAlert(\"برای ویرایش متن باید ابتدا ثبت نام کنید یا وارد حساب کاربری خود شوید\")'> ویرایش متن </a>" + "</p>");
+                }
+
+        </script>
+
 {% endblock content %}
