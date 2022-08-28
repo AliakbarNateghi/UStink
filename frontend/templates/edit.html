@@ -1,0 +1,49 @@
+{% extends 'main.html' %}
+{% block content %}
+    <div id="mySidenav" class="sidenav">
+              <a class="closebtn" onclick="shift()">&#9776;</a>
+              <a style="font-family: 'B Nazanin'" href="{% url "home" %}"><span class="glyphicon glyphicon-form"></span> صفحه اصلی </a>
+              <a style="font-family: 'B Nazanin'" href="{% url "login" %}"><span class="glyphicon glyphicon-log-in"></span> ورود </a>
+              <a style="font-family: 'B Nazanin'" href="{% url "register" %}"><span class="glyphicon glyphicon-user"></span> ثبت نام </a>
+        </div>
+
+        <div id="main">
+          <span style="font-size:30px;cursor:pointer" onclick="shift()">&#9776;</span>
+        </div>
+
+        <script>
+        let x = 0
+        function shift()
+        {
+            if (x === 0)
+            {
+                openNav()
+                x = 1
+            }else {
+                closeNav()
+                x = 0
+            }
+        }
+
+        function openNav()
+        {
+          document.getElementById("mySidenav").style.width = "100%";
+          document.getElementById("main").style.marginLeft = "250px";
+        }
+
+        function closeNav()
+        {
+          document.getElementById("mySidenav").style.width = "0";
+          document.getElementById("main").style.marginLeft= "0";
+        }
+        </script>
+
+        <form action="" method="post">
+            <div class="form-group">
+                <label for="message"> ویرایش پیام </label>
+                <br><br>
+                <textarea class="form-control form-control-lg" id="message" name="message"
+                placeholder="..." rows="20" cols="100"  required> Default Text </textarea>
+            </div>
+        </form>
+{% endblock content %}

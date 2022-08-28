@@ -2,10 +2,10 @@
 {% block content %}
 
         <div id="mySidenav" class="sidenav">
-          <a href="#" class="closebtn" onclick="shift()">&#9776;</a>
-          <a href="#"><span class="glyphicon glyphicon-log-in"></span> ورود </a>
-          <a href="#"><span class="glyphicon glyphicon-user"></span> ثبت نام </a>
-          <a href="#"><span class="glyphicon glyphicon-phone"></span> ارتباط با ما </a>
+          <a style="font-family: 'B Nazanin'" class="closebtn" onclick="shift()">&#9776;</a>
+          <a style="font-family: 'B Nazanin'" href="{% url "login" %}"><span class="glyphicon glyphicon-log-in"></span> ورود </a>
+          <a style="font-family: 'B Nazanin'" href="{% url "register" %}"><span class="glyphicon glyphicon-user"></span> ثبت نام </a>
+          <a style="font-family: 'B Nazanin'" href="{% url "contactus" %}"><span class="glyphicon glyphicon-phone"></span> ارتباط با ما </a>
         </div>
 
         <div id="main">
@@ -40,7 +40,7 @@
         </script>
 
         <form action="{% url "home" %}" method="post">
-        {% csrf_token %}
+            {% csrf_token %}
             <div class="form-group">
                 <label for="name">اسمش چیه؟</label>
                 <input class="form-control form-control-lg" id="name" type="text" name="name"
@@ -61,35 +61,6 @@
 
 
         <script>
-
-            {#function myAlertFunction()#}
-            {#{#}
-            {#    if(!alertify.myAlert){#}
-            {#      //define a new dialog#}
-            {#      alertify.dialog('myAlert',function()#}
-            {#      {#}
-            {#        return{#}
-            {#          main:function(message)#}
-            {#          {#}
-            {#            this.message = message;#}
-            {#          },#}
-            {#          setup:function()#}
-            {#          {#}
-            {#              return {#}
-            {#                buttons:[{text: "ok", key:27/*Esc*/}, {text: "edit"}],#}
-            {#                focus: { element:0 }#}
-            {#              };#}
-            {#          },#}
-            {#          prepare:function(){#}
-            {#            this.setContent(this.message);#}
-            {#          }#}
-            {#      }});#}
-            {#    }#}
-            {##}
-            {#    let defaultText = "The MIT License (MIT) Copyright (c) 2014 Mohammad Younes Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal  in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software."#}
-            {#    alertify.myAlert(defaultText);#}
-
-
 
                 function myAlertFunction() {
                     if (!alertify.errorAlert) {

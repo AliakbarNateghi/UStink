@@ -1,0 +1,73 @@
+{% extends 'main.html' %}
+{% block content %}
+
+        <div id="mySidenav" class="sidenav">
+              <a class="closebtn" onclick="shift()">&#9776;</a>
+              <a style="font-family: 'B Nazanin'" href="{% url "home" %}"><span class="glyphicon glyphicon-form"></span> صفحه اصلی </a>
+              <a style="font-family: 'B Nazanin'" href="{% url "login" %}"><span class="glyphicon glyphicon-log-in"></span> ورود </a>
+              <a style="font-family: 'B Nazanin'" href="{% url "register" %}"><span class="glyphicon glyphicon-user"></span> ثبت نام </a>
+        </div>
+
+        <div id="main">
+          <span style="font-size:30px;cursor:pointer" onclick="shift()">&#9776;</span>
+        </div>
+
+        <script>
+        let x = 0
+        function shift()
+        {
+            if (x === 0)
+            {
+                openNav()
+                x = 1
+            }else {
+                closeNav()
+                x = 0
+            }
+        }
+
+        function openNav()
+        {
+          document.getElementById("mySidenav").style.width = "100%";
+          document.getElementById("main").style.marginLeft = "250px";
+        }
+
+        function closeNav()
+        {
+          document.getElementById("mySidenav").style.width = "0";
+          document.getElementById("main").style.marginLeft= "0";
+        }
+        </script>
+
+
+
+
+    <form action="" method="post">
+            {% csrf_token %}
+            <div class="form-group" style="float: right">
+{#                <a href="" class='fa fa-user-circle btn' style='font-size:36px'></a>#}
+                <a href="https://t.me/aliakbar_nateghi" class='fa fa-telegram btn' style='font-size:36px'></a>
+                <a href="https://github.com/AliakbarNateghi" class='fa fa-github btn' style='font-size:36px'></a>
+{#                <a href="nateghialiakbar@yahoo.com" class='fa fa-envelope btn' style='font-size:36px'></a>#}
+            </div>
+            <br><br><br><br>
+            <div class="form-group">
+                <label for="name">اسم</label>
+                <input class="form-control form-control-lg" id="name" type="text" name="name"
+                maxlength="100" style="float: right" size="40" placeholder="علی اکبر" required>
+            </div>
+            <br><br>
+            <div class="form-group">
+                <label for="email">ایمیل</label>
+                <input class="form-control form-control-lg" id="email" type="email" name="email"
+                placeholder="ustink@gmail.com" maxlength="256" required>
+            </div>
+
+            <div class="form-group">
+                <label for="message">پیام</label>
+                <textarea class="form-control form-control-lg" id="message" name="message"
+                          placeholder="..." rows="6" required></textarea>
+            </div>
+            <input type="submit" value="ارسال" class="btn btn-primary bg-primary" style="float: right">
+        </form>
+{% endblock content %}

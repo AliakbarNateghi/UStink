@@ -1,14 +1,66 @@
 {% extends 'main.html' %}
 {% block content %}
+        <div id="mySidenav" class="sidenav">
+          <a class="closebtn" onclick="shift()">&#9776;</a>
+          <a style="font-family: 'B Nazanin'" href="{% url "home" %}"><span class="glyphicon glyphicon-menu"></span> صفحه اصلی </a>
+          <a style="font-family: 'B Nazanin'" href="{% url "register" %}"><span class="glyphicon glyphicon-user"></span> ثبت نام </a>
+          <a style="font-family: 'B Nazanin'" href="{% url "contactus" %}"><span class="glyphicon glyphicon-phone"></span> ارتباط با ما </a>
+        </div>
 
-    <form>
-        <label for="userName">name: </label>
-        <input id="userName" type="text" name="userName" maxlength="100" required>
+        <div id="main">
+          <span style="font-size:30px;cursor:pointer" onclick="shift()">&#9776;</span>
+        </div>
 
-        <label for="password">Your name: </label>
-        <input id="password" type="password" name="password" maxlength="256" required>
+        <script>
+        let x = 0
+        function shift()
+        {
+            if (x === 0)
+            {
+                openNav()
+                x = 1
+            }else {
+                closeNav()
+                x = 0
+            }
+        }
 
-        <input type="submit" value="submit">
-    </form>
+        function openNav()
+        {
+          document.getElementById("mySidenav").style.width = "100%";
+          document.getElementById("main").style.marginLeft = "250px";
+        }
+
+        function closeNav()
+        {
+          document.getElementById("mySidenav").style.width = "0";
+          document.getElementById("main").style.marginLeft= "0";
+        }
+        </script>
+
+
+        <form action="{% url "login" %}" method="post">
+            {% csrf_token %}
+            <h1 style="font-family: 'B Nazanin'; font-size: 55px; float: right"> ورود </h1>
+            <br><br><br><br><br>
+            <div class="form-group">
+                <label for="username"> نام کاربری </label>
+                <input class="form-control form-control-lg" id="username" type="text" name="username"
+                maxlength="100" style="float: right" size="40" placeholder="ali_akbar" required>
+            </div>
+            <br><br><br>
+            <div class="form-group">
+                <label for="password"> رمز عبور </label>
+                <input class="form-control form-control-lg" id="password" type="password" name="password"
+                placeholder="**********" maxlength="256" required>
+            </div>
+            <br>
+            <input type="submit" value=" ورود " class="btn btn-primary bg-primary" style="float: right">
+            <br><br><br>
+            <p style="float: right; font-family: 'B Nazanin'; font-size: 20px"> آیا حساب کاربری ندارید؟ <a href="{% url "register" %}"> ثبت نام </a></p>
+        </form>
+
+
+
 
 {% endblock content %}
