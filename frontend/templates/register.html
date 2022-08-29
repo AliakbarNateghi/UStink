@@ -1,109 +1,77 @@
 {% extends 'main.html' %}
 {% block content %}
-        <div id="mySidenav" class="sidenav">
-              <a class="closebtn" onclick="shift()">&#9776;</a>
-              <a style="font-family: 'B Nazanin'" href="{% url "home" %}"><span class="glyphicon glyphicon-menu"></span> صفحه اصلی </a>
-              <a style="font-family: 'B Nazanin'" href="{% url "login" %}"><span class="glyphicon glyphicon-log-in"></span> ورود </a>
-              <a style="font-family: 'B Nazanin'" href="{% url "contactus" %}"><span class="glyphicon glyphicon-phone"></span> ارتباط با ما </a>
-        </div>
 
-        <div id="main">
+    {# Navbar links #}
+    <div id="mySidenav" class="sidenav">
+          <a class="closebtn" onclick="shift()">&#9776;</a>
+          <a style="font-family: 'B Nazanin'" href="{% url "home" %}"><span class="glyphicon glyphicon-th"></span> صفحه اصلی </a>
+          <a style="font-family: 'B Nazanin'" href="{% url "login" %}"><span class="glyphicon glyphicon-log-in"></span> ورود </a>
+          <a style="font-family: 'B Nazanin'" href="{% url "contactus" %}"><span class="glyphicon glyphicon-send"></span> ارتباط با ما </a>
+    </div>
+
+    {# Span for shifting #}
+    <div id="main">
           <span style="font-size:30px;cursor:pointer" onclick="shift()">&#9776;</span>
-        </div>
+    </div>
 
-        <script>
-        let x = 0
-        function shift()
+    <script>
+    let x = 0
+    function shift() {# Shifting between opening and closing the Nav #}
+    {
+        if (x === 0)
         {
-            if (x === 0)
-            {
-                openNav()
-                x = 1
-            }else {
-                closeNav()
-                x = 0
-            }
+            openNav()
+            x = 1
+        }else {
+            closeNav()
+            x = 0
         }
+    }
 
-        function openNav()
-        {
-          document.getElementById("mySidenav").style.width = "100%";
-          document.getElementById("main").style.marginLeft = "250px";
-        }
+    function openNav() {# Open Nav #}
+    {
+      document.getElementById("mySidenav").style.width = "100%";
+      document.getElementById("main").style.marginLeft = "250px";
+    }
 
-        function closeNav()
-        {
-          document.getElementById("mySidenav").style.width = "0";
-          document.getElementById("main").style.marginLeft= "0";
-        }
-        </script>
+    function closeNav() {# Close Nav #}
+    {
+      document.getElementById("mySidenav").style.width = "0";
+      document.getElementById("main").style.marginLeft= "0";
+    }
+    </script>
 
+    {# Register Form #}
+    <div class="card-body">
+        <form action="{% url "register" %}" method="POST">
+            {% csrf_token %}
 
-{#    <form action="{% url "login" %}" method="post">#}
-{#            {% csrf_token %}#}
-{#            <h1 style="font-family: 'B Nazanin'; font-size: 55px; float: right"> ثبت نام </h1>#}
-{#            <br><br><br><br>#}
-{#            <div class="form-group">#}
-{#                <label for="userName"> نام کاربری </label>#}
-{#                <input class="form-control form-control-lg" id="userName" type="text" name="userName"#}
-{#                maxlength="100" style="float: right" size="40" placeholder="ali_akbar" required>#}
-{#            </div>#}
-{#            <br><br>#}
-{#            <div class="form-group">#}
-{#                <label for="email"> ایمیل </label>#}
-{#                <input class="form-control form-control-lg" id="email" type="email" name="email"#}
-{#                maxlength="100" style="float: right" size="40" placeholder="ustink@gmail.com" required>#}
-{#            </div>#}
-{#            <br><br>#}
-{#            <div class="form-group">#}
-{#                <label for="password1"> رمز عبور </label>#}
-{#                <input class="form-control form-control-lg" id="password1" type="password" name="password1"#}
-{#                placeholder="**********" maxlength="256" required>#}
-{#            </div>#}
-{##}
-{#            <div class="form-group">#}
-{#                <label for="password2"> تایید رمز عبور </label>#}
-{#                <input class="form-control form-control-lg" id="password2" type="password" name="password2"#}
-{#                placeholder="**********" maxlength="256" required>#}
-{#            </div>#}
-{#            <br>#}
-{#            <input type="submit" value=" ثبت نام " class="btn btn-primary bg-primary" style="float: right">#}
-{#            <br><br>#}
-{#            <p style="float: right; font-family: 'B Nazanin'; font-size: 20px"> آیا حساب کاربری دارید؟ <a href="{% url "login" %}"> ورود </a></p>#}
-{#        </form>#}
+            <h1 style="font-family: 'B Nazanin'; font-size: 55px; float: right"> ثبت نام </h1>
+            <br><br><br><br><br>
+            <div class="form-group">
+                <label for="username"> نام کاربری </label>
+                {{ form.username }}
+            </div>
 
+            <div class="form-group">
+            <label for="email"> ایمیل </label>
+            {{ form.email }}
+            </div>
 
-<div class="card-body">
-    <form action="{% url "register" %}" method="POST">
-        {% csrf_token %}
+            <div class="form-group">
+            <label for="password1"> رمز عبور </label>
+            {{ form.password1 }}
+            </div>
 
-        <h1 style="font-family: 'B Nazanin'; font-size: 55px; float: right"> ثبت نام </h1>
-        <br><br><br><br><br>
-        <div class="form-group">
-            <label for="username"> نام کاربری </label>
-            {{ form.username }}
-        </div>
-
-        <div class="form-group">
-        <label for="email"> ایمیل </label>
-        {{ form.email }}
-        </div>
-
-        <div class="form-group">
-        <label for="password1"> رمز عبور </label>
-        {{ form.password1 }}
-        </div>
-
-        <div class="form-group">
-        <label for="password2"> تایید رمز عبور </label>
-        {{ form.password2 }}
-        </div>
-        <br>
-        <input type="submit" value=" ثبت نام " class="btn btn-primary bg-primary" style="float: right">
-        <br><br>
-        <p style="float: right; font-family: 'B Nazanin'; font-size: 20px"> آیا حساب کاربری دارید؟ <a href="{% url "login" %}"> ورود </a></p>
-    </form>
-</div>
-
+            <div class="form-group">
+            <label for="password2"> تایید رمز عبور </label>
+            {{ form.password2 }}
+            </div>
+            <br>
+            <input type="submit" value=" ثبت نام " class="btn btn-primary bg-primary" style="float: right">
+            <br><br>
+            <p style="float: right; font-family: 'B Nazanin'; font-size: 20px"> آیا حساب کاربری دارید؟ <a href="{% url "login" %}"> ورود </a></p>
+        </form>
+    </div>
 
 {% endblock content %}

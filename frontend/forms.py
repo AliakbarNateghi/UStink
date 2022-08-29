@@ -8,6 +8,13 @@ class CreateUserForm(UserCreationForm):
     email = forms.EmailField(max_length=256,
                              widget=forms.EmailInput(attrs={'placeholder': 'ustink@gmail.com', 'size': "40",
                                                             'class': "form-control form-control-lg"}))
+    phone = forms.PhoneNumberField()
+
+    password1 = forms.CharField(max_length=100, widget=forms.PasswordInput(
+        attrs={'class': 'form-control form-control-lg', 'placeholder': '**********'}))
+
+    password2 = forms.CharField(max_length=100, widget=forms.PasswordInput(
+        attrs={'class': 'form-control form-control-lg', 'placeholder': '**********'}))
 
     class Meta:
         model = User
@@ -16,16 +23,15 @@ class CreateUserForm(UserCreationForm):
             'username': TextInput(attrs={
                 'class': "form-control form-control-lg",
                 'placeholder': 'ali_akbar'
-            }),
-            'password1': PasswordInput(attrs={
-                'class': "form-control form-control-lg",
-                'placeholder': '**********',
-            }),
-            'password2': PasswordInput(attrs={
-                'class': "form-control form-control-lg",
-                'placeholder': '**********'
             })
         }
+
+        # def __init__(self, *args, **kwargs):
+        #     super(CreateUserForm, self).__init__(*args, **kwargs)
+        #     self.fields['password1'].widget = PasswordInput(attrs={'class': 'form-control form-control-lg',
+        #                                                            'placeholder': 'Password1'})
+        #     self.fields['password2'].widget = PasswordInput(attrs={'class': 'form-control form-control-lg',
+        #                                                            'placeholder': 'Password2'})
 
 # from django import forms
 # from django.contrib.auth.forms import UserCreationForm

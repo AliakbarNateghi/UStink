@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
@@ -20,47 +21,27 @@ def home(request):
 
 def index(request):
     if not request.user.is_authenticated:
-        return render(request, 'login.html', {'message': None})
+        return render(request, 'login.html', {'message': ' با موفقیت وارید شدید '})
 
     return HttpResponseRedirect(reverse('home'))
 
 
-def login_view(request):
-    username = request.POST['username']
-    password = request.POST['password']
+def LoginView(request):
+    username = request.POST.get('username')
+    password = request.POST.get('password')
     user = authenticate(request, username=username, password=password)
 
     if user is not None:
         login(request, user)
         return HttpResponseRedirect(reverse('index'))
     else:
-        return render(request, 'login.html', {'message': 'Login fail.'})
+        return render(request, 'login.html', {'message': ' لطفا دوباره متحان کنید '})
 
 
-def logout_view(request):
-    logout(request)
-    return render(request, 'login.html', {'message': 'Logged out.'})
+# def logout_view(request):
+#     logout(request)
+#     return render(request, 'login.html', {'message': 'Logged out.'})
 
-
-# def register_view(request):
-#     if request.method == 'GET':
-#         return render(request, 'register.html', {'message': None})
-#     else:
-#         username = request.POST['userName']
-#         email = request.POST['email']
-#         password1 = request.POST['password1']
-#         password2 = request.POST['password2']
-#         user = authenticate(request, username=username, password=password1)
-#         if user is None:
-#             new_user = User.objects.create_user(username, email, password1,
-#                                                 password2=password2)
-#             new_user.save()
-#             login(request, new_user)
-#             return HttpResponseRedirect(reverse('index'))
-#         else:
-#             return render(request,
-#                           'register.html',
-#                           {'message': 'User already exists.'})
 
 class RegisterPage(FormView):
     template_name = 'register.html'
@@ -84,5 +65,11 @@ def contactus(request):
     return render(request, 'contactus.html')
 
 
+@login_required(redirect_field_name='index')
 def edit(request):
     return render(request, 'edit.html')
+
+
+@login_required(redirect_field_name='index')
+def completeProfile(request):
+    return render(request, 'completeProfile.html')

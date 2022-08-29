@@ -4,7 +4,7 @@
     <div id="mySidenav" class="sidenav">
         <a class="closebtn" onclick="shift()">&#9776;</a>
         <a style="font-family: 'B Nazanin'" href="{% url "home" %}"><span class="glyphicon glyphicon-th"></span> صفحه اصلی </a>
-        <a style="font-family: 'B Nazanin'" href="{% url "completeProfile" %}"><span class="glyphicon glyphicon-user"></span> تکمیل پروفایل </a>
+        <a style="font-family: 'B Nazanin'" href="{% url "edit" %}"><span class="glyphicon glyphicon-edit"></span> ویرایش متن </a>
         <a style="font-family: 'B Nazanin'" href="{% url "contactus" %}"><span class="glyphicon glyphicon-send"></span> ارتباط با ما </a>
         <a style="font-family: 'B Nazanin'" href="{% url "logout" %}"><span class="glyphicon glyphicon-log-out"></span> خروج </a>
     </div>
@@ -41,13 +41,37 @@
         </script>
 
     <div class="card-body">
-        <form action="" method="post">
+        <form action="{% url "completeProfile" %}" method="POST">
+            {% csrf_token %}
+
+            <h1 style="font-family: 'B Nazanin'; font-size: 55px; float: right"> ثبت نام </h1>
+            <br><br><br><br><br>
             <div class="form-group">
-                <label for="message"> ویرایش پیام </label>
-                <br><br>
-                <textarea class="form-control form-control-lg" id="message" name="message"
-                placeholder="..." rows="20" cols="100"  required> Default Text </textarea>
+                <label for="username"> نام کاربری </label>
+                {{ form.username }}
             </div>
+
+            <div class="form-group">
+                <label for="firstname"> نام </label>
+                {{ form.firstname }}
+            </div>
+
+            <div class="form-group">
+                <label for="lastname"> نام خانوادگی </label>
+                {{ form.lastname }}
+            </div>
+
+            <div class="form-group">
+            <label for="email"> ایمیل </label>
+            {{ form.email }}
+            </div>
+
+            <div class="form-group">
+            <label for="number"> شماره تلفن </label>
+            {{ form.phone }}
+            </div>
+
+            <br>
             <input type="submit" value=" اعمال تغییرات " class="btn btn-primary bg-primary" style="float: right">
         </form>
     </div>
